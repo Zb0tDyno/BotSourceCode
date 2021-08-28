@@ -6,26 +6,11 @@ from asyncio import sleep
 import os
 import aiohttp
 import random
-import json
 from config import config
 
 cfg = config
-primed = False
 
-# Honestly idk what i'm doing here, the warn command needs a shit tone of stuff
-with open('reports.json', encoding='utf-8') as f:
-  try:
-    report = json.load(f)
-  except ValueError:
-    report = {}
-    report['users'] = []
-
-# importing
-Creators = os.environ.get('Creators')
-nukepword = os.environ.get('NUKEPWORD')
-
-# Version number
-Version = cfg.Version
+Version = "1.0.0.0"
 
 prefix = cfg.BOT_PREFIX
 
@@ -37,7 +22,7 @@ client = commands.Bot(command_prefix= prefix, help_command = None)
 async def on_message(message):
   mention = f'<@!{client.user.id}> prefix'
   if mention in message.content:
-    await message.channel.sent(f'<@{message.author.id}> the bots prefix is `mtf `')
+    await message.channel.sent(f'<@{message.author.id}> the bots prefix is `{prefix}`')
   else:
     pass
   await client.process_commands(message)
@@ -54,16 +39,8 @@ async def info(ctx):
   embed=discord.Embed(title = 'What is this bot?', descripton = 'This bot was for this server, it is currently a W I P but that will change', color = discord.Colour.blurple())
   embed.add_field(name = 'Who can nuke the server?', value=('anyone with L-5 clearance and above'))
   embed.add_field(name = 'Who can prep the nuke?', value = ('anyone with L-4 clearence and above'))
-  embed.add_field(name = 'Developers', value = (Creators))
   embed.set_thumbnail(url='https://cdn.discordapp.com/attachments/790716118947594250/842113685643198534/image0.png')
   await ctx.send(embed = embed)
-
-# discharge command
-@client.command()
-@commands.has_any_role('L-4', 'L-5', 'SCP Omni', 'Phantom Task Force Commander', 'MTF Commander', 'Best Friend')
-async def disarm(ctx):
-    await sleep(5)
-    await ctx.send('warhead disarmed')
 
 # Ban command
 @client.command()
@@ -134,4 +111,4 @@ TOKEN = os.environ.get('TOKEN')
 client.run(TOKEN)
 
 keep_alive()
-# Created by Zbot
+# Created by Zbot and Carnoval15
