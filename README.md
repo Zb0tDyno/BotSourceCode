@@ -1,5 +1,5 @@
 # BotSourceCode
-Source code for @Apraxed's bots,
+Source code for [@Apraxed](https://github.com/Apraxed)'s bots,
 
 Current bots included in this: Mobile Task Force bot
 
